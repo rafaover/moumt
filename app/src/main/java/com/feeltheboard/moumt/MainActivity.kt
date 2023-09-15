@@ -32,6 +32,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     MoumtTheme {
-        MoumtScreen()
+        MoumtScreen(
+            modifier = Modifier.fillMaxSize()
+        )
     }
 }
