@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">moumt</string>
+    <string name="glasses_count">You had %d water glasses</string>
+</resources>
