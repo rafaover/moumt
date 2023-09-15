@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">moumt</string>
     <string name="glasses_count">You had %d water glasses</string>
+    <string name="drink_one_more">Drink one more</string>
 </resources>
