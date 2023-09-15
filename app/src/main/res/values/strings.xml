@@ -3,4 +3,5 @@
     <string name="glasses_count">You had %d water glasses</string>
     <string name="drink_one_more">Drink one more</string>
     <string name="close">Close</string>
+    <string name="clear">Clear Count</string>
 </resources>
