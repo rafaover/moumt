@@ -31,7 +31,7 @@ fun WaterCounter(modifier: Modifier = Modifier) {
             if (showTask) {
                 TaskItem(
                     taskName = "Stand-up and Walk",
-                    onClose = { /*TODO*/ }
+                    onClose = { showTask = false }
                 )
             }
         }
