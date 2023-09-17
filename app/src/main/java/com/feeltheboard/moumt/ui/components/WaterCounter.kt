@@ -17,40 +17,37 @@ import androidx.compose.ui.res.stringResource
 import com.feeltheboard.moumt.R
 
 /**
- * Composable to increase and show amount of glasses of water and Tasks
+ * Composable to increase and show amount of glasses of water and Tasks.
+ * The role of the StatelessCounter is to display the count and call a function when you
+ * increment the count. To do this, follow the pattern described above and pass the state,
+ * count (as a parameter to the composable function), and a lambda (onIncrement), that is
+ * called when the state needs to be incremented.
  */
 @Composable
-fun WaterCounter(modifier: Modifier = Modifier) {
+fun StatelessWaterCounter(count: Int, onIncrement: () -> Unit, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.padding(dimensionResource(R.dimen.medium_padding))
     ) {
-        var count by rememberSaveable { mutableStateOf(0) }
         if (count > 0) {
-//            var showTask by remember { mutableStateOf(true) }
             Text(text = stringResource(R.string.glasses_count, count))
-
-//            if (showTask) {
-//                TaskItem(
-//                    taskName = "Stand-up and Walk",
-//                    onClose = { showTask = false }
-//                )
-//            }
         }
-        Row(
-            modifier = Modifier.padding(top = dimensionResource(R.dimen.small_padding))
+        Button(
+            onClick = onIncrement,
+            modifier = Modifier.padding(end = dimensionResource(R.dimen.small_padding)),
+            enabled = count < 10
         ) {
-            Button(
-                onClick = { count++ },
-                modifier = Modifier.padding(end = dimensionResource(R.dimen.small_padding)),
-                enabled = count < 10
-            ) {
-                Text(stringResource(R.string.drink_one_more))
-            }
-//            Button(
-//                onClick = { count = 0 },
-//            ) {
-//                Text(stringResource(R.string.clear))
-//            }
+            Text(stringResource(R.string.drink_one_more))
         }
     }
+}
+
+/**
+ * StatefulCounter owns the state. That means that it holds the count state and modifies
+ * it when calling the StatelessCounter function. Hoisted count from StatelessCounter to
+ * StatefulCounter
+ */
+@Composable
+fun StatefulWaterCounter(modifier: Modifier = Modifier) {
+    var count by rememberSaveable { mutableStateOf(0)}
+    StatelessWaterCounter(count = count, onIncrement = { count++ }, modifier)
 }
