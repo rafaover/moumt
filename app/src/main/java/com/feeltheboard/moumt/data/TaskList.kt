@@ -2,8 +2,8 @@ package com.feeltheboard.moumt.data
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.feeltheboard.moumt.ui.components.StatefulTaskItem
 
@@ -16,12 +16,14 @@ private fun generateTaskList() =
 @Composable
 fun TaskList(
     modifier: Modifier = Modifier,
-    list: List<Task> = remember { generateTaskList() }
+    list: List<Task> = generateTaskList()
 ) {
+    val lazyListState = rememberLazyListState()
     LazyColumn(
-        modifier = modifier
+        modifier = modifier,
+        state = lazyListState
     ) {
-        items(list) {task ->
+        items(list) { task ->
             StatefulTaskItem(taskName = task.label)
         }
     }
