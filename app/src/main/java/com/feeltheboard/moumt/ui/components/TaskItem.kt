@@ -9,10 +9,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -24,7 +20,7 @@ import com.feeltheboard.moumt.R
 fun StatelessTaskItem(
     taskName: String,
     checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit,
+    onCheckedTask: (Boolean) -> Unit,
     onClose: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -40,24 +36,10 @@ fun StatelessTaskItem(
         )
         Checkbox(
             checked = checked,
-            onCheckedChange = onCheckedChange
+            onCheckedChange = onCheckedTask
         )
         IconButton(onClick = onClose) {
             Icon(Icons.Filled.Close, contentDescription = stringResource(R.string.close))
         }
     }
-}
-
-/** Stateful Task Item Composable */
-@Composable
-fun StatefulTaskItem(taskName: String, modifier: Modifier = Modifier, onClose: () -> Unit) {
-    var checkedState by rememberSaveable { mutableStateOf(false) }
-
-    StatelessTaskItem(
-        taskName = taskName,
-        checked = checkedState,
-        onCheckedChange = { newValue -> checkedState = newValue },
-        onClose = onClose,
-        modifier = modifier,
-    )
 }
