@@ -5,13 +5,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.feeltheboard.moumt.ui.components.StatefulTaskItem
+import com.feeltheboard.moumt.ui.components.StatelessTaskItem
 
 @Composable
 fun TaskList(
     modifier: Modifier = Modifier,
     list: List<Task>,
-    onCloseTask: (Task) -> Unit
+    onCloseTask: (Task) -> Unit,
+    onCheckedTask: (Task, Boolean) -> Unit
 ) {
     /* The composable function rememberLazyListState creates an initial state for the list using
     rememberSaveable. When the Activity is recreated, the scroll state is maintained without you
@@ -26,7 +27,12 @@ fun TaskList(
             items = list,
             key = { task -> task.id }
         ) { task ->
-            StatefulTaskItem(taskName = task.label, onClose = { onCloseTask(task) })
+            StatelessTaskItem(
+                taskName = task.label,
+                checked = task.checked,
+                onClose = { onCloseTask(task) },
+                onCheckedTask = { checked -> onCheckedTask(task, checked) }
+            )
         }
     }
 }
