@@ -50,14 +50,14 @@ fun StatelessTaskItem(
 
 /** Stateful Task Item Composable */
 @Composable
-fun StatefulTaskItem(taskName: String, modifier: Modifier = Modifier) {
+fun StatefulTaskItem(taskName: String, modifier: Modifier = Modifier, onClose: () -> Unit) {
     var checkedState by rememberSaveable { mutableStateOf(false) }
 
     StatelessTaskItem(
         taskName = taskName,
         checked = checkedState,
         onCheckedChange = { newValue -> checkedState = newValue },
-        onClose = { TODO() },
+        onClose = onClose,
         modifier = modifier,
     )
 }
