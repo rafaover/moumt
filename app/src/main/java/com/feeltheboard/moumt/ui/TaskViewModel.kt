@@ -14,6 +14,14 @@ class TaskViewModel: ViewModel() {
         _tasks.remove(item)
     }
 
+    fun changeTaskWhenChecked(
+        item: Task,
+        checked: Boolean
+    ) =
+        tasks.find { it.id == item.id }?.let {task ->
+            task.checked = checked
+        }
+
     /** Method to generate a random list */
     private fun generateTaskList() =
         List(20) {
