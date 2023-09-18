@@ -18,7 +18,10 @@ fun MoumtScreen(
         TaskList(
             modifier = modifier,
             list = taskViewModel.tasks,
-            onCloseTask = { task -> taskViewModel.remove(task) }
+            onCloseTask = { task -> taskViewModel.remove(task) },
+            onCheckedTask = { task, checked->
+                taskViewModel.changeTaskWhenChecked(task, checked)
+            }
         )
     }
 }
