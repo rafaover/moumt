@@ -9,10 +9,12 @@ class TaskViewModel: ViewModel() {
     val tasks: List<Task>
         get() = _tasks
 
+    /** Method to remove a specific Task from a List */
     fun remove(item: Task) {
         _tasks.remove(item)
     }
 
+    /** Method to generate a random list */
     private fun generateTaskList() =
         List(20) {
             Task(it, "Task # $it")
